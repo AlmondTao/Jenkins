@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <contextName>logback</contextName>
+    <!--<jmxConfigurator/>-->
+    <!--<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />-->
+    <!--<conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />-->
+    <!--<conversionRule conversionWord="wEx"-->
+                    <!--converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />-->
+
+    <property name="LOG_FILE" value="Jenkins01.%d{yyyy-MM-dd}.log" />
+    <property name="LOG_ADDRESS" value="./Jenkins01-log"/>
+    <!--<property name="FILE_PATH" value="SP/SUPPORT-PLATFORM/bapfopm-sp-ua-service/src/main/resources/"/>-->
+    <!--输出到控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+             <level>ERROR</level>
+         </filter>-->
+        <encoder>
+            <pattern>%clr(%d{HH:mm:ss.SSS}){red} %clr(%contextName){green} %clr([%thread]) %clr(%-5level){blue} %clr(%logger{36}){magenta} - %clr(%msg%n)</pattern>
+        </encoder>
+        <!--<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50}:  %msg%n</pattern>-->
+        <!--</encoder>-->
+    </appender>
+
+    <!--输出到文件-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file>${LOG_FILE}</file>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_ADDRESS}/${LOG_FILE}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--<logger name="com.digital.controllerImp.PcipgasController" level="warn" additivity="false">-->
+        <!--&lt;!&ndash; <level value="INFO" /> &ndash;&gt;-->
+
+        <!--<appender-ref ref="console" />-->
+    <!--</logger>-->
+    <!--myibatis log configure-->
+    <!--<logger name="com.taoqy.dao" level="debug" />-->
+
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.mybatis" level="WARN" />
+    <logger name="org.apache.ibatis" level="DEBUG" />
+    <logger name="org.mybatis.generator" level="info" />
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="info" />
+
+
+    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Statement" level="DEBUG" />
+    <!--<logger name="java.sql.Pre"/>-->
+    <!--myibatis log configure-->
+    <!--<logger name="com.digital.dao" level="debug" />-->
+
+    <!--<logger name="org.springframework" level="WARN" />-->
+    <!--<logger name="org.mybatis" level="WARN" />-->
+    <!--<logger name="org.apache.ibatis" level="DEBUG" />-->
+    <!--<logger name="org.mybatis.generator" level="info" />-->
+    <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="info" />-->
+
+
+    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Statement" level="DEBUG" />
+    <logger name="java.sql.PreparedStatement" level="DEBUG" />
+    paredStatement" level="DEBUG" />
+    <root level="info">
+        <!--<appender-ref ref="CONSOLE" />-->
+        <appender-ref ref="file" />
+    </root>
+
+    <!-- logback为java中的包 -->
+    <!--<logger name="com.dudu.controller"/>-->
+    <!--logback.LogbackDemo：类的全路径 -->
+    <!--<logger name="com.dudu.controller.LearnController" level="WARN" additivity="true">-->
+    <!--<appender-ref ref="console"/>-->
+    <!--</logger>-->
+
+    <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
+    <!--<springProfile name="dev">-->
+        <!--<logger name="cn.milo.controllor" level="DUBUG" />-->
+    <!--</springProfile>-->
+    <!-- 生产环境. -->
+    <!--<springProfile name="prod">-->
+        <!--<logger name="cn.milo.controllor" level="INFO" />-->
+    <!--</springProfile>-->
+</configuration>
